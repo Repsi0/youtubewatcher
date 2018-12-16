@@ -26,7 +26,7 @@ public class Main extends Canvas implements Runnable {
 		
 		String[] timeTypes = new String[] {"Second", "Minute", "Hour", "Day", "Week", "Month"};
 		JComboBox<String> jcb = new JComboBox<String>(timeTypes);
-		jcb_win = new Window(100,100, "Extra thing", jcb, jcb);
+		jcb_win = new Window(100,100, "Choice Box", jcb, jcb);
 		
 		
 		this.start();
