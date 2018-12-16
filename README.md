@@ -1,2 +1,2 @@
 # youtubewatcher
-Get &amp; display live stats for video.
+Get and display live stats for video. Uses https://jsoup.org/.
