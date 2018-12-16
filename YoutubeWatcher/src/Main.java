@@ -22,7 +22,7 @@ public class Main extends Canvas implements Runnable {
 	public Main() {
 		new Calculations(video_id);
 		
-		win = new Window(800, 600, "Live counter", this, null);
+		win = new Window(800, 600, "YouTube Watcher", this, null);
 		
 		String[] timeTypes = new String[] {"Second", "Minute", "Hour", "Day", "Week", "Month"};
 		JComboBox<String> jcb = new JComboBox<String>(timeTypes);
