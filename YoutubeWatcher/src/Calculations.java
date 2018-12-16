@@ -16,6 +16,7 @@ public class Calculations {
 	public static double ratio_increase;
 	public static Document doc;
 	public static int views_inc, likes_inc, dislikes_inc;
+	private static String youtube_id;
 	
 	public Calculations(String youtube_id) {
 		try {
@@ -23,6 +24,8 @@ public class Calculations {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		Calculations.youtube_id = youtube_id;
 		prev_likes = likes_ytr;
 		likes_ytr = getInt(doc.getElementById("live-likes").html());
 		prev_dislikes = dislikes_ytr;
@@ -42,7 +45,7 @@ public class Calculations {
 		return Integer.parseInt(final_str);
 	}
 
-	public static void calculations(String youtube_id) {
+	public static void calculations() {
 		try {
 			doc = Jsoup.connect("https://dbase.tube/v/" + youtube_id).get();
 		} catch (IOException e) {

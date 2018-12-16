@@ -13,12 +13,15 @@ public class Main extends Canvas implements Runnable {
 	public static Window win;
 	public static Window jcb_win;
 	
+	public String video_id = "YbJOTdZBX1g"; //<-- Put youtube id here (The text after ?v= in the link)
+	
 	public static void main(String[] args) {
 		new Main();
 	}
 	
 	public Main() {
-		new Calculations("YbJOTdZBX1g");
+		new Calculations(video_id);
+		
 		win = new Window(800, 600, "Live counter", this, null);
 		
 		String[] timeTypes = new String[] {"Second", "Minute", "Hour", "Day", "Week", "Month"};
@@ -46,7 +49,7 @@ public class Main extends Canvas implements Runnable {
 				e.printStackTrace();
 			}
 			
-			Calculations.calculations("YbJOTdZBX1g");
+			Calculations.calculations();
 			render();
 		}
 	}
@@ -87,8 +90,18 @@ public class Main extends Canvas implements Runnable {
 		
 		g.drawString("Total since started: " + isPositive(Calculations.inc_dislikes_totaled) + Calculations.inc_dislikes_totaled + " dislikes (Average: " + new DecimalFormat("#######.##").format(Calculations.avg_inc_dislikes) + " per second)", 800/3, 2*600/3+20);
 		
-		g.drawString("Ratio(Total): " + new DecimalFormat("#######.##").format(Calculations.ratio_total) + " dislikes per like.", 800/3, 600/2 - 10);
-		g.drawString("Ratio(Change): " + new DecimalFormat("#######.##").format(Calculations.ratio_increase) + " dislikes gained per like gained", 800 / 3, 600 / 2 + 10);
+		if(Calculations.ratio_total > 1)
+			g.drawString("Ratio(Total): " + new DecimalFormat("#######.##").format(Calculations.ratio_total) + " dislikes per like.", 800/3, 600/2 - 10);
+		else {
+			g.setColor(Color.GREEN);
+			g.drawString("Ratio(Total): " + new DecimalFormat("#######.##").format((double) 1 / Calculations.ratio_total) + " likes per dislike.", 800/3, 600/2 - 10);
+		}
+		if(Calculations.ratio_increase > 1)
+			g.drawString("Ratio(Change): " + new DecimalFormat("#######.##").format(Calculations.ratio_increase) + " dislikes gained per like gained", 800 / 3, 600 / 2 + 10);
+		else {
+			g.setColor(Color.GREEN);
+			g.drawString("Ratio(Change): " + new DecimalFormat("#######.##").format((double) 1 / Calculations.ratio_increase) + " likes gained per dislike gained", 800 / 3, 600 / 2 + 10);
+		}
 		
 		g.setColor(Color.GREEN);
 		g.drawString("Likes per " + jcb_win.jcb.getSelectedItem() + ": " + new DecimalFormat("#######.##").format(calculateTimewise(jcb_win.jcb.getSelectedIndex(), Calculations.avg_inc_likes)), 800/3, 600-80);
